@@ -3,11 +3,12 @@ import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig(({ mode }) => {
-  // Load env file based on mode
+  // Load environment variables
   const env = loadEnv(mode, process.cwd(), "");
 
   return {
     plugins: [react()],
+    base: "/", // Root base path, change if deployed to subfolder
     server: {
       port: 3000,
       proxy: {
