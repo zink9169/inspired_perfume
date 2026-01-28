@@ -1,27 +1,24 @@
-// config/database.js
 const { Pool } = require("pg");
 require("dotenv").config();
 
-// Serverless connection pool optimization
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
   },
-  // IMPORTANT for serverless:
-  max: 5, // Reduce connections
-  idleTimeoutMillis: 30000, // Close idle connections faster
-  connectionTimeoutMillis: 5000,
+  max: 10,
 });
 
-// Handle connection errors
+pool.on("connect", () => {
+  console.log("✅ PostgreSQL connected");
+});
+
 pool.on("error", (err) => {
-  console.error("Unexpected database error:", err);
+  console.error("❌ PostgreSQL error:", err);
+  process.exit(1);
 });
 
 module.exports = {
   query: (text, params) => pool.query(text, params),
   pool,
-  // Helper function for serverless
-  close: () => pool.end(),
 };

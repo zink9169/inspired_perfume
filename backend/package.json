@@ -1,13 +1,13 @@
 {
   "name": "perfume-store-backend",
   "version": "1.0.0",
-  "description": "Perfume E-commerce Backend with Admin Panel",
-  "main": "src/app.js",
+  "type": "commonjs",
   "scripts": {
     "start": "node src/app.js",
-    "dev": "nodemon src/app.js",
-    "vercel-build": "echo 'Building for Vercel...'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/app.js"
+  },
+  "engines": {
+    "node": "18.x"
   },
   "dependencies": {
     "express": "^4.18.2",
